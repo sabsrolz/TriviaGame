@@ -13,17 +13,20 @@
     />
   </head>
   <body>
-    <script src="assets/javascript/app.js"></script>
     <div id="container" class="col-md-10">
       <h1 class="text-center">Totally Trivial Trivia</h1>
-      <div id="timer" class="row">Live Timer</div>
-      <div id="question" class="row">Question 1</div>
+      <div id="game_start" class="row">
+        <button id="start">Start Game!</button>
+      </div>
+      <div id="timer" class="row"></div>
+      <div id="question" class="row"></div>
       <div id="options">
-        <div id="answer1" class="row">Answer 1</div>
-        <div id="answer2" class="row">Answer 2</div>
-        <div id="answer3" class="row">Answer 3</div>
-        <div id="answer4" class="row">Answer 4</div>
+        <div id="answer1" class="answers row"></div>
+        <div id="answer2" class="answers row"></div>
+        <div id="answer3" class="answers row"></div>
+        <div id="answer4" class="answers row"></div>
       </div>
     </div>
+    <script src="assets/javascript/app.js"></script>
   </body>
 </html>
