@@ -1,5 +1,8 @@
 $(document).ready(function() {
-  let second = 25;
+  //declare variables
+  let completed = false;
+  let round = 0;
+  let number = 25;
   let intervalId;
 
   function run() {
@@ -7,40 +10,103 @@ $(document).ready(function() {
   }
 
   function decrement() {
-    $("#timer").html("<h2>" + second + "</h2>");
-    second--;
+    number--;
+
+    $("#timer").html("<h2>" + number + "</h2>");
+
+    if (number === 0) {
+      stop();
+      next_round();
+      number = 25;
+      run();
+    }
   }
 
-  let question1 = {
-    A1: 1,
-    A2: 2,
-    A3: 3,
-    A4: 4
+  function stop() {
+    clearInterval(intervalId);
+  }
+  const question1 = {
+    Q: "This is question 1",
+    A: "Answer 1",
+    B: "Answer 2",
+    C: "Answer 3",
+    D: "Answer 4",
+    A1: "Correct",
+    B1: "Incorrect",
+    C1: "Incorrect",
+    D1: "Incorrect"
   };
 
-  const questions = [question1];
+  const question2 = {
+    Q: "This is question 2",
+    A: "Answer A",
+    B: "Answer B",
+    C: "Answer C",
+    D: "Answer D",
+    A1: "Incorrect",
+    B1: "Correct",
+    C1: "Incorrect",
+    D1: "Correct"
+  };
+
+  const questions = [question1, question2];
+
+  //game starts
+  function next_round() {
+    round++;
+
+    $("#answer1").attr("answer", questions[round].A);
+    $("#answer2").attr("answer", questions[round].B);
+    $("#answer3").attr("answer", questions[round].C);
+    $("#answer4").attr("answer", questions[round].D);
+
+    $("#answer1").attr("correct", questions[round].A1);
+    $("#answer2").attr("correct", questions[round].B1);
+    $("#answer3").attr("correct", questions[round].C1);
+    $("#answer4").attr("correct", questions[round].D1);
+
+    $("#question").text(questions[round].Q);
+    $("#answer1").text(questions[round].A);
+    $("#answer2").text(questions[round].B);
+    $("#answer3").text(questions[round].C);
+    $("#answer4").text(questions[round].D);
+
+    $("#question").show();
+    $("#answer1").show();
+    $("#answer2").show();
+    $("#answer3").show();
+    $("#answer4").show();
+  }
 
   $("#start").on("click", function gameStarts() {
-    setTimeout(roundStarts, 25000);
-
     run();
-  });
+    $("#start").hide(); //hide start button
+    //create attribute that contains possible answers
+    $("#answer1").attr("answer", questions[round].A);
+    $("#answer2").attr("answer", questions[round].B);
+    $("#answer3").attr("answer", questions[round].C);
+    $("#answer4").attr("answer", questions[round].D);
+    //create attribute that contains if answer is correct
+    $("#answer1").attr("correct", questions[round].A1);
+    $("#answer2").attr("correct", questions[round].B1);
+    $("#answer3").attr("correct", questions[round].C1);
+    $("#answer4").attr("correct", questions[round].D1);
+    //display questions and possible answers to html
+    $("#question").text(questions[round].Q);
+    $("#answer1").text(questions[round].A);
+    $("#answer2").text(questions[round].B);
+    $("#answer3").text(questions[round].C);
+    $("#answer4").text(questions[round].D);
 
-  function roundStarts() {
-    $("#answer1").attr("answer", question1.A1);
-    $("#answer2").attr("answer", question1.A2);
-    $("#answer3").attr("answer", question1.A3);
-    $("#answer4").attr("answer", question1.A4);
-
-    // $("#question").text("");
-    // $("#answer1").text("1");
-    // $("#answer2").text("2");
-    // $("#answer3").text("3");
-    // $("#answer4").text("4");
-
-    $(".answers").on("click", function() {
-      var answer_option = $(this).attr("answer");
-      alert("click!");
+    $(".answers").on("click", function select_option() {
+      $("#question").hide();
+      $("#answer1").hide();
+      $("#answer2").hide();
+      $("#answer3").hide();
+      $("#answer4").hide();
+      var correct = $(this).attr("correct");
+      $("#output").text(correct);
+      completed = true;
     });
-  }
+  });
 });
