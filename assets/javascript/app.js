@@ -31,10 +31,11 @@ $(document).ready(function() {
     B: "Answer 2",
     C: "Answer 3",
     D: "Answer 4",
-    A1: "Correct",
+    A1: "Correct :)",
     B1: "Incorrect",
     C1: "Incorrect",
-    D1: "Incorrect"
+    D1: "Incorrect",
+    correct: "Correct :)"
   };
 
   const question2 = {
@@ -44,15 +45,23 @@ $(document).ready(function() {
     C: "Answer C",
     D: "Answer D",
     A1: "Incorrect",
-    B1: "Correct",
+    B1: "Correct :)",
     C1: "Incorrect",
-    D1: "Correct"
+    D1: "Incorrect",
+    correct: "Correct :)"
   };
 
   const questions = [question1, question2];
 
+  // function feedback() {
+  //   next_round();
+  // }
+
   //game starts
   function next_round() {
+    $("#output").hide();
+    number = 25;
+    run();
     round++;
 
     $("#answer1").attr("answer", questions[round].A);
@@ -76,6 +85,8 @@ $(document).ready(function() {
     $("#answer2").show();
     $("#answer3").show();
     $("#answer4").show();
+
+    //select_option();
   }
 
   $("#start").on("click", function gameStarts() {
@@ -99,14 +110,22 @@ $(document).ready(function() {
     $("#answer4").text(questions[round].D);
 
     $(".answers").on("click", function select_option() {
+      $("#output").show();
+      stop();
+      setTimeout(next_round, 3000);
       $("#question").hide();
       $("#answer1").hide();
       $("#answer2").hide();
       $("#answer3").hide();
       $("#answer4").hide();
-      var correct = $(this).attr("correct");
-      $("#output").text(correct);
-      completed = true;
+      var correct_answer = $(this).attr("correct");
+      if (correct_answer === questions[round].correct) {
+        $("#output").text("You are correct!");
+      } else {
+        $("#output").text(
+          "Incorrect! The correct answer is " + questions[round].correct + "!"
+        );
+      }
     });
   });
 });
