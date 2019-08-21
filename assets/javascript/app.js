@@ -58,6 +58,7 @@ $(document).ready(function() {
   // }
 
   //game starts
+
   function next_round() {
     $("#output").hide();
     number = 25;
