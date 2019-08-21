@@ -4,6 +4,7 @@ $(document).ready(function() {
   let round = 0;
   let number = 25;
   let intervalId;
+  const total_rounds = 2;
 
   function run() {
     intervalId = setInterval(decrement, 1000);
@@ -62,12 +63,19 @@ $(document).ready(function() {
   //game starts
 
   function next_round() {
+    round++;
+    if (round === total_rounds) {
+      $("#end_game").text("End of game! Thanks for playing!");
+      $("#timer").hide();
+      $("#image").hide();
+    }
+
     $("#output").hide();
     $("#image").hide();
     $("#image_round").hide();
     number = 25;
     run();
-    round++;
+    // round++;
 
     $("#answer1").attr("answer", questions[round].A);
     $("#answer2").attr("answer", questions[round].B);
@@ -131,7 +139,7 @@ $(document).ready(function() {
         $("#image").replaceWith(
           '<img id = "image_round" src="assets/images/' +
             questions[round].image +
-            '" class="ml-5 col-md-3 text-center img-thumbnail">'
+            '" class="col-md-3 text-center img-thumbnail">'
         );
       } else {
         $("#output").text(
@@ -140,7 +148,7 @@ $(document).ready(function() {
         $("#image").replaceWith(
           '<img "image_round" src="assets/images/' +
             questions[round].image +
-            '" class="ml-5 col-md-3 img-thumbnail">'
+            '" class="col-md-3 img-thumbnail">'
         );
       }
     });
