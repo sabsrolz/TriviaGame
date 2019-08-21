@@ -31,11 +31,12 @@ $(document).ready(function() {
     B: "Answer 2",
     C: "Answer 3",
     D: "Answer 4",
-    A1: "Correct :)",
+    A1: "Correct",
     B1: "Incorrect",
     C1: "Incorrect",
     D1: "Incorrect",
-    correct: "Correct :)"
+    correct: "Correct",
+    image: "placeholder1.jpg"
   };
 
   const question2 = {
@@ -45,10 +46,11 @@ $(document).ready(function() {
     C: "Answer C",
     D: "Answer D",
     A1: "Incorrect",
-    B1: "Correct :)",
+    B1: "Correct",
     C1: "Incorrect",
     D1: "Incorrect",
-    correct: "Correct :)"
+    correct: "Correct",
+    image: "placeholder1.jpg"
   };
 
   const questions = [question1, question2];
@@ -61,6 +63,8 @@ $(document).ready(function() {
 
   function next_round() {
     $("#output").hide();
+    $("#image").hide();
+    $("#image_round").hide();
     number = 25;
     run();
     round++;
@@ -111,6 +115,8 @@ $(document).ready(function() {
     $("#answer4").text(questions[round].D);
 
     $(".answers").on("click", function select_option() {
+      $("#image").show();
+      $("#image_round").show();
       $("#output").show();
       stop();
       setTimeout(next_round, 3000);
@@ -122,9 +128,19 @@ $(document).ready(function() {
       var correct_answer = $(this).attr("correct");
       if (correct_answer === questions[round].correct) {
         $("#output").text("You are correct!");
+        $("#image").replaceWith(
+          '<img id = "image_round" src="assets/images/' +
+            questions[round].image +
+            '" class="ml-5 col-md-3 text-center img-thumbnail">'
+        );
       } else {
         $("#output").text(
           "Incorrect! The correct answer is " + questions[round].correct + "!"
+        );
+        $("#image").replaceWith(
+          '<img "image_round" src="assets/images/' +
+            questions[round].image +
+            '" class="ml-5 col-md-3 img-thumbnail">'
         );
       }
     });

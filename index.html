@@ -14,19 +14,26 @@
   </head>
   <body>
     <div id="container" class="col-md-10">
-      <h1 class="text-center">Totally Trivial Trivia</h1>
+      <h1 class="mt-2 mb-5 text-center">Totally Trivial Trivia</h1>
       <div id="game_start" class="row">
-        <button id="start">Start Game!</button>
+        <div class="col text-center">
+          <button id="start" type="button" class="btn btn-primary btn-lg">
+            Start Game!
+          </button>
+        </div>
       </div>
-      <div id="timer" class="row"></div>
-      <div id="question" class="row"></div>
+      <div class="row">
+        <div id="timer" class="col text-center"></div>
+      </div>
+      <div id="question" class="m-3 col text-center"></div>
       <div id="options">
-        <div id="answer1" class="answers row"></div>
-        <div id="answer2" class="answers row"></div>
-        <div id="answer3" class="answers row"></div>
-        <div id="answer4" class="answers row"></div>
-        <div id="output" class="row"></div>
-        <div id="feedback" class="row"></div>
+        <div id="answer1" class="m-2 answers col text-center"></div>
+        <div id="answer2" class="m-2 answers col text-center"></div>
+        <div id="answer3" class="m-2 answers col text-center"></div>
+        <div id="answer4" class="m-2 answers col text-center"></div>
+        <div id="output" class="col text-center"></div>
+        <div id="image" class="col-md-3 text-center"></div>
+        <div id="feedback" class="col text-center"></div>
       </div>
     </div>
     <script src="assets/javascript/app.js"></script>
