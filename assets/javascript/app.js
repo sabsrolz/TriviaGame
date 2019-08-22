@@ -9,6 +9,7 @@ $(document).ready(function() {
   let losses = 0;
 
   function run() {
+    //number = 10;
     intervalId = setInterval(decrement, 1000);
   }
 
@@ -16,24 +17,25 @@ $(document).ready(function() {
     $("#timer").html("<h2>" + number + "</h2>");
     console.log(number);
 
-    //$("#timer").html("<h2>" + number + "</h2>");
-
     if (number === 0) {
-      console.log(number);
       stop();
+
+      console.log(number);
+
       losses++;
-      $("#timer").hide();
 
       $("#output").show();
       console.log(number);
       $("#output").text("You ran out of time!");
+
+      $("#timer").hide();
       console.log(number);
       $("#question").hide();
       $("#answer1").hide();
       $("#answer2").hide();
       $("#answer3").hide();
       $("#answer4").hide();
-
+      number = 10;
       setTimeout(next_round, 3000);
     } else {
       number--;
@@ -42,36 +44,133 @@ $(document).ready(function() {
 
   function stop() {
     clearInterval(intervalId);
+    number = 10;
   }
   const question1 = {
-    Q: "This is question 1",
-    A: "Answer 1",
-    B: "Answer 2",
-    C: "Answer 3",
-    D: "Answer 4",
+    Q: "Who invented the BALLPOINT PEN?",
+    A: "Biro Brothers",
+    B: "Waterman Brothers",
+    C: "Bicc Brothers",
+    D: "Write Brothers",
     A1: "Correct",
     B1: "Incorrect",
     C1: "Incorrect",
     D1: "Incorrect",
-    correct: "Correct",
+    correct: "Biro Brothers",
     image: "placeholder1.jpg"
   };
 
   const question2 = {
-    Q: "This is question 2",
-    A: "Answer A",
-    B: "Answer B",
-    C: "Answer C",
-    D: "Answer D",
+    Q: "Which scientist discovered the radioactive element radium?",
+    A: "Isaac Newton",
+    B: "Albert Einstein",
+    C: "Benjamin Franklin",
+    D: "Marie Curie",
+    A1: "Incorrect",
+    B1: "Incorrect",
+    C1: "Incorrect",
+    D1: "Correct",
+    correct: "Marie Curie",
+    image: "placeholder1.jpg"
+  };
+
+  const question3 = {
+    Q:
+      "What is the name of the CalTech seismologist who invented the scale used to measure the magnitude of earthquakes?",
+    A: "Charles Richter",
+    B: "Hiram Walker",
+    C: "Giuseppe Mercalli",
+    D: "Joshua Rumble",
+    A1: "Correct",
+    B1: "Incorrect",
+    C1: "Incorrect",
+    D1: "Incorrect",
+    correct: "Charles Richter",
+    image: "placeholder1.jpg"
+  };
+
+  const question4 = {
+    Q: "What invention caused many deaths while testing it?",
+    A: "Dynamite",
+    B: "Ladders",
+    C: "Parachute",
+    D: "Race cars",
+    A1: "Incorrect",
+    B1: "Incorrect",
+    C1: "Correct",
+    D1: "Incorrect",
+    correct: "Parachute",
+    image: "placeholder1.jpg"
+  };
+
+  const question5 = {
+    Q:
+      "Who was the first American female to patent her invention, a method of weaving straw with silk?",
+    A: "Marjorie Joyner",
+    B: "Margaret Knight",
+    C: "Amanda Jones",
+    D: "Mary Kies",
+    A1: "Incorrect",
+    B1: "Incorrect",
+    C1: "Incorrect",
+    D1: "Correct",
+    correct: "Mary Kies",
+    image: "placeholder1.jpg"
+  };
+
+  const question6 = {
+    Q: "When was Monopoly created?",
+    A: "1940s",
+    B: "1930s",
+    C: "1920s",
+    D: "1950s",
     A1: "Incorrect",
     B1: "Correct",
     C1: "Incorrect",
     D1: "Incorrect",
-    correct: "Correct",
+    correct: "1930s",
     image: "placeholder1.jpg"
   };
 
-  const questions = [question1, question2];
+  const question7 = {
+    Q:
+      "What invention is credited to the Russian born American inventor Vladimir Kosma Zworykin?",
+    A: "Telegraph",
+    B: "Radio",
+    C: "Television",
+    D: "Dishwasher",
+    A1: "Incorrect",
+    B1: "Incorrect",
+    C1: "Correct",
+    D1: "Incorrect",
+    correct: "Television",
+    image: "placeholder1.jpg"
+  };
+
+  const question8 = {
+    Q: "Where was the yo-yo invented?",
+    A: "France",
+    B: "United States",
+    C: "Philippines",
+    D: "England",
+    A1: "Incorrect",
+    B1: "Incorrect",
+    C1: "Correct",
+    D1: "Incorrect",
+    correct: "Philippines",
+    image: "placeholder1.jpg"
+  };
+
+  const questions = [
+    question1,
+    question2,
+    question3,
+    question4,
+    question5,
+    question6,
+    question7,
+    question8
+  ];
 
   // function feedback() {
   //   next_round();
@@ -82,8 +181,9 @@ $(document).ready(function() {
   function next_round() {
     round++;
     number = 10;
-    $("#image_round").hide();
     $("#timer").show();
+
+    $("#image_round").hide();
 
     if (round === total_rounds) {
       $("#timer").hide();
