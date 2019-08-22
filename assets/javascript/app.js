@@ -14,17 +14,20 @@ $(document).ready(function() {
 
   function decrement() {
     $("#timer").html("<h2>" + number + "</h2>");
-    number--;
+    console.log(number);
 
     //$("#timer").html("<h2>" + number + "</h2>");
 
     if (number === 0) {
+      console.log(number);
+      stop();
       losses++;
       $("#timer").hide();
-      stop();
 
       $("#output").show();
+      console.log(number);
       $("#output").text("You ran out of time!");
+      console.log(number);
       $("#question").hide();
       $("#answer1").hide();
       $("#answer2").hide();
@@ -32,6 +35,8 @@ $(document).ready(function() {
       $("#answer4").hide();
 
       setTimeout(next_round, 3000);
+    } else {
+      number--;
     }
   }
 
