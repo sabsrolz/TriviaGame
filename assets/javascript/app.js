@@ -2,7 +2,7 @@ $(document).ready(function() {
   //declare variables
   let completed = false;
   let round = 0;
-  let number = 25;
+  let number = 10;
   let intervalId;
   const total_rounds = 2;
   let wins = 0;
@@ -76,10 +76,13 @@ $(document).ready(function() {
 
   function next_round() {
     round++;
+    number = 10;
+    $("#image_round").hide();
     $("#timer").show();
+
     if (round === total_rounds) {
       $("#timer").hide();
-      $("#image").hide();
+      $("#image_round").hide();
       $("#end_game").text("End of game! Thanks for playing!");
       $("#score").text(
         "Your final score is: " +
@@ -91,9 +94,8 @@ $(document).ready(function() {
     }
 
     $("#output").hide();
-    $("#image").hide();
-    $("#image_round").hide();
-    number = 25;
+
+    //number = 10;
     run();
     // round++;
 
@@ -152,9 +154,8 @@ $(document).ready(function() {
     );
 
     $(".answers").on("click", function select_option() {
+      $("#image_round").hide();
       $("#timer").show();
-      $("#image").show();
-      $("#image_round").show();
       $("#output").show();
       stop();
       setTimeout(next_round, 3000);
@@ -166,6 +167,7 @@ $(document).ready(function() {
       var correct_answer = $(this).attr("correct");
 
       if (correct_answer === questions[round].correct) {
+        $("#image_round").show();
         $("#output").text("You are correct!");
         $("#image").replaceWith(
           '<img id = "image_round" src="assets/images/' +
@@ -174,6 +176,7 @@ $(document).ready(function() {
         );
         wins++;
       } else if (correct_answer !== questions[round].correct) {
+        $("#image_round").show();
         $("#output").text(
           "Incorrect! The correct answer is " + questions[round].correct + "!"
         );
