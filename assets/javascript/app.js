@@ -5,21 +5,33 @@ $(document).ready(function() {
   let number = 25;
   let intervalId;
   const total_rounds = 2;
+  let wins = 0;
+  let losses = 0;
 
   function run() {
     intervalId = setInterval(decrement, 1000);
   }
 
   function decrement() {
+    $("#timer").html("<h2>" + number + "</h2>");
     number--;
 
-    $("#timer").html("<h2>" + number + "</h2>");
+    //$("#timer").html("<h2>" + number + "</h2>");
 
     if (number === 0) {
+      losses++;
+      $("#timer").hide();
       stop();
-      next_round();
-      number = 25;
-      run();
+
+      $("#output").show();
+      $("#output").text("You ran out of time!");
+      $("#question").hide();
+      $("#answer1").hide();
+      $("#answer2").hide();
+      $("#answer3").hide();
+      $("#answer4").hide();
+
+      setTimeout(next_round, 3000);
     }
   }
 
@@ -64,10 +76,18 @@ $(document).ready(function() {
 
   function next_round() {
     round++;
+    $("#timer").show();
     if (round === total_rounds) {
-      $("#end_game").text("End of game! Thanks for playing!");
       $("#timer").hide();
       $("#image").hide();
+      $("#end_game").text("End of game! Thanks for playing!");
+      $("#score").text(
+        "Your final score is: " +
+          wins +
+          " correct answers and " +
+          losses +
+          " incorrect answers"
+      );
     }
 
     $("#output").hide();
@@ -122,7 +142,17 @@ $(document).ready(function() {
     $("#answer3").text(questions[round].C);
     $("#answer4").text(questions[round].D);
 
+    $(".answers").hover(
+      function() {
+        $(this).css("background-color", "violet");
+      },
+      function() {
+        $(this).css("background-color", "green");
+      }
+    );
+
     $(".answers").on("click", function select_option() {
+      $("#timer").show();
       $("#image").show();
       $("#image_round").show();
       $("#output").show();
@@ -134,6 +164,7 @@ $(document).ready(function() {
       $("#answer3").hide();
       $("#answer4").hide();
       var correct_answer = $(this).attr("correct");
+
       if (correct_answer === questions[round].correct) {
         $("#output").text("You are correct!");
         $("#image").replaceWith(
@@ -141,7 +172,8 @@ $(document).ready(function() {
             questions[round].image +
             '" class="col-md-3 text-center img-thumbnail">'
         );
-      } else {
+        wins++;
+      } else if (correct_answer !== questions[round].correct) {
         $("#output").text(
           "Incorrect! The correct answer is " + questions[round].correct + "!"
         );
@@ -150,6 +182,7 @@ $(document).ready(function() {
             questions[round].image +
             '" class="col-md-3 img-thumbnail">'
         );
+        losses++;
       }
     });
   });
