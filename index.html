@@ -12,29 +12,43 @@
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     />
   </head>
-  <body>
+  <body background="assets/images/background.jpg">
     <div id="container" class="col-md-10">
-      <h1 class="mt-2 mb-5 text-center">Totally Trivial Trivia</h1>
+      <h1 class="mt-2 mb-5 text-center text-light">Totally Trivial Trivia</h1>
+      <h3 class="mt-2 mb-5 text-center text-light">Inventions of the World</h3>
       <div id="game_start" class="row">
         <div class="col text-center">
-          <button id="start" type="button" class="btn btn-primary btn-lg">
+          <button
+            id="start"
+            type="button"
+            class="row mt-5 mb-5 btn btn-success btn-lg"
+          >
             Start Game!
           </button>
+          <div id="startImage"></div>
         </div>
       </div>
       <div class="row">
-        <div id="timer" class="col text-center"></div>
+        <div id="timer" class="text-light col text-center"></div>
       </div>
-      <div id="question" class="m-3 col text-center"></div>
+      <div
+        id="question"
+        class="m-2 mb-3 col text-center font-weight-bold"
+        style="background-color:burlywood"
+      ></div>
       <div id="options">
-        <div id="answer1" class="m-2 answers col text-center"></div>
-        <div id="answer2" class="m-2 answers col text-center"></div>
-        <div id="answer3" class="m-2 answers col text-center"></div>
-        <div id="answer4" class="m-2 answers col text-center"></div>
-        <div id="output" class="col text-center"></div>
+        <div id="answer1" class="m-2 text-light answers col text-center"></div>
+        <div id="answer2" class="m-2 text-light answers col text-center"></div>
+        <div id="answer3" class="m-2 text-light answers col text-center"></div>
+        <div id="answer4" class="m-2 text-light answers col text-center"></div>
+        <div>
+          <h5 id="output" class="text-light col text-center "></h5>
+        </div>
         <div id="image" class="col-md-3 text-center"></div>
-        <div id="end_game" class="col text-center"></div>
-        <div id="score" class="col text-center"></div>
+        <div>
+          <h5 id="end_game" class="m-3 text-light col text-center"></h5>
+        </div>
+        <div id="score" class="text-light col text-center"></div>
       </div>
     </div>
     <script src="assets/javascript/app.js"></script>

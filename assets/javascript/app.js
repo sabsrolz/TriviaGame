@@ -7,6 +7,23 @@ $(document).ready(function() {
   let wins = 0;
   let losses = 0;
   let image_id = [];
+  const key = "nxy71hu767W2YM7H7grusEx0f6oO54gW";
+
+  $.ajax({
+    url:
+      "https://api.giphy.com/v1/gifs/search?q=globe&api_key=" +
+      key +
+      "&limit=2",
+    method: "GET"
+  }).then(function(response) {
+    output = response;
+    start_image = output.data[0].images.original.url;
+    $("#startImage").replaceWith(
+      '<img id = "startImage" src="' +
+        start_image +
+        '" class=ml-5 row img-thumbnail">'
+    );
+  });
 
   const question1 = {
     Q: "Who invented the BALLPOINT PEN?",
@@ -15,7 +32,7 @@ $(document).ready(function() {
     C: "Bicc Brothers",
     D: "Write Brothers",
     correct: "Biro Brothers",
-    image: "ballpoint + pen"
+    image: "ballpointpen"
   };
 
   const question2 = {
@@ -57,7 +74,7 @@ $(document).ready(function() {
     C: "Amanda Jones",
     D: "Mary Kies",
     correct: "Mary Kies",
-    image: "silk"
+    image: "silky"
   };
 
   const question6 = {
@@ -78,7 +95,7 @@ $(document).ready(function() {
     C: "Television",
     D: "Dishwasher",
     correct: "Television",
-    image: "television"
+    image: "tv"
   };
 
   const question8 = {
@@ -150,6 +167,8 @@ $(document).ready(function() {
     $("#image").hide();
 
     if (round === total_rounds) {
+      stop();
+      $("#output").hide();
       $("#timer").hide();
       $("#image").hide();
       $("#end_game").text("End of game! Thanks for playing!");
@@ -160,6 +179,7 @@ $(document).ready(function() {
           losses +
           " incorrect answers"
       );
+      setTimeout(gameStarts, 5000);
     }
 
     $("#output").hide();
@@ -185,6 +205,7 @@ $(document).ready(function() {
   }
 
   $("#start").on("click", function gameStarts() {
+    $("#startImage").hide();
     run();
     $("#start").hide(); //hide start button
     //create attribute that contains possible answers
@@ -205,7 +226,7 @@ $(document).ready(function() {
         $(this).css("background-color", "violet");
       },
       function() {
-        $(this).css("background-color", "white");
+        $(this).css("background-color", "black");
       }
     );
   });
@@ -222,7 +243,7 @@ $(document).ready(function() {
     $("#answer3").hide();
     $("#answer4").hide();
     var correct_answer = $(this).attr("answer");
-    const key = "nxy71hu767W2YM7H7grusEx0f6oO54gW";
+
     let queryURL =
       "https://api.giphy.com/v1/gifs/search?q=" +
       questions[round].image +
