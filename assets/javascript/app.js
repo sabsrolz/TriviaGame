@@ -168,6 +168,7 @@ $(document).ready(function() {
 
     if (round === total_rounds) {
       stop();
+      $("#q_number").hide();
       $("#output").hide();
       $("#timer").hide();
       $("#image").hide();
@@ -269,7 +270,7 @@ $(document).ready(function() {
         $("#image").replaceWith(
           '<img id = "image" src="' +
             questions[round].image +
-            '" class="col-md-3 text-center img-thumbnail">'
+            '" class="col-md-4 text-center img-thumbnail">'
         );
         wins++;
       } else if (correct_answer !== questions[round].correct) {
@@ -280,7 +281,7 @@ $(document).ready(function() {
         $("#image").replaceWith(
           '<img id = "image" src="' +
             questions[round].image +
-            '" class="col-md-3 text-center img-thumbnail">'
+            '" class="col-md-4 text-center img-thumbnail">'
         );
         losses++;
       }
