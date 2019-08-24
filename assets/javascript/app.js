@@ -32,7 +32,8 @@ $(document).ready(function() {
     C: "Benjamin Franklin",
     D: "Marie Curie",
     correct: "Marie Curie",
-    image: "radium"
+    image: "radium",
+    imageUrl: ""
   };
   const question2 = {
     Q: "Who invented the BALLPOINT PEN?",
@@ -41,7 +42,8 @@ $(document).ready(function() {
     C: "Bicc Brothers",
     D: "Write Brothers",
     correct: "Biro Brothers",
-    image: "ballpoint + pen"
+    image: "ballpoint + pen",
+    imageUrl: ""
   };
 
   const question3 = {
@@ -52,7 +54,8 @@ $(document).ready(function() {
     C: "Giuseppe Mercalli",
     D: "Joshua Rumble",
     correct: "Charles Richter",
-    image: "earthquake"
+    image: "earthquake",
+    imageUrl: ""
   };
 
   const question4 = {
@@ -62,7 +65,8 @@ $(document).ready(function() {
     C: "Parachute",
     D: "Race cars",
     correct: "Parachute",
-    image: "parachute"
+    image: "parachute",
+    imageUrl: ""
   };
 
   const question5 = {
@@ -73,7 +77,8 @@ $(document).ready(function() {
     C: "Amanda Jones",
     D: "Mary Kies",
     correct: "Mary Kies",
-    image: "silky"
+    image: "silky",
+    imageUrl: ""
   };
 
   const question6 = {
@@ -83,7 +88,8 @@ $(document).ready(function() {
     C: "1920s",
     D: "1950s",
     correct: "1930s",
-    image: "monopoly"
+    image: "monopoly",
+    imageUrl: ""
   };
 
   const question7 = {
@@ -94,7 +100,8 @@ $(document).ready(function() {
     C: "Television",
     D: "Dishwasher",
     correct: "Television",
-    image: "tv"
+    image: "tv",
+    imageUrl: ""
   };
 
   const question8 = {
@@ -104,7 +111,8 @@ $(document).ready(function() {
     C: "Philippines",
     D: "England",
     correct: "Philippines",
-    image: "yo-yo"
+    image: "yo-yo",
+    imageUrl: ""
   };
 
   const questions = [
@@ -146,7 +154,7 @@ $(document).ready(function() {
       $("#answer3").hide();
       $("#answer4").hide();
       number = 10;
-      setTimeout(next_round, 5000);
+      setTimeout(next_round, 1000);
     } else {
       number--;
     }
@@ -167,12 +175,14 @@ $(document).ready(function() {
     $("#image").hide();
 
     if (round === total_rounds) {
-      stop();
+      $("#reset_game").show();
       $("#q_number").hide();
       $("#output").hide();
       $("#timer").hide();
       $("#image").hide();
+      $("#end_game").show();
       $("#end_game").text("End of game! Thanks for playing!");
+      $("#score").show();
       $("#score").text(
         "Your final score is: " +
           wins +
@@ -180,32 +190,77 @@ $(document).ready(function() {
           losses +
           " incorrect answers"
       );
-      setTimeout(gameStarts, 5000);
+      $("#reset_game").on("click", function resetGame() {
+        wins = 0;
+        losses = 0;
+        round = 0;
+        $("#timer").show();
+        $("#end_game").hide();
+        $("#score").hide();
+        $("#reset_game").hide();
+        $("#startImage").hide();
+        stop();
+        run();
+        $("#q_number").text("Question " + (round + 1));
+        $("#q_number").show();
+        $("#start").hide(); //hide start button
+        //create attribute that contains possible answers
+        $("#answer1").attr("answer", questions[round].A);
+        $("#answer2").attr("answer", questions[round].B);
+        $("#answer3").attr("answer", questions[round].C);
+        $("#answer4").attr("answer", questions[round].D);
+
+        //display questions and possible answers to html
+        $("#question").text(questions[round].Q);
+        $("#answer1").text(questions[round].A);
+        $("#answer2").text(questions[round].B);
+        $("#answer3").text(questions[round].C);
+        $("#answer4").text(questions[round].D);
+
+        $("#question").show();
+        $("#answer1").show();
+        $("#answer2").show();
+        $("#answer3").show();
+        $("#answer4").show();
+
+        $(".answers").hover(
+          function() {
+            $(this).css("background-color", "violet");
+          },
+          function() {
+            $(this).css("background-color", "black");
+          }
+        );
+
+        //setTimeout(gameStarts, 5000);
+      });
+    } else {
+      $("#output").hide();
+
+      run();
+
+      $("#answer1").attr("answer", questions[round].A);
+      $("#answer2").attr("answer", questions[round].B);
+      $("#answer3").attr("answer", questions[round].C);
+      $("#answer4").attr("answer", questions[round].D);
+
+      $("#question").text(questions[round].Q);
+      $("#answer1").text(questions[round].A);
+      $("#answer2").text(questions[round].B);
+      $("#answer3").text(questions[round].C);
+      $("#answer4").text(questions[round].D);
+
+      $("#question").show();
+      $("#answer1").show();
+      $("#answer2").show();
+      $("#answer3").show();
+      $("#answer4").show();
     }
-
-    $("#output").hide();
-
-    run();
-
-    $("#answer1").attr("answer", questions[round].A);
-    $("#answer2").attr("answer", questions[round].B);
-    $("#answer3").attr("answer", questions[round].C);
-    $("#answer4").attr("answer", questions[round].D);
-
-    $("#question").text(questions[round].Q);
-    $("#answer1").text(questions[round].A);
-    $("#answer2").text(questions[round].B);
-    $("#answer3").text(questions[round].C);
-    $("#answer4").text(questions[round].D);
-
-    $("#question").show();
-    $("#answer1").show();
-    $("#answer2").show();
-    $("#answer3").show();
-    $("#answer4").show();
   }
 
   $("#start").on("click", function gameStarts() {
+    $("#reset_game").hide();
+    $("#start").show();
     $("#q_number").html("Question 1");
     $("#startImage").hide();
     run();
@@ -259,7 +314,7 @@ $(document).ready(function() {
     }).then(function(response) {
       output = response;
       img_url = output.data[0].images.original.url;
-      questions[round].image = img_url;
+      questions[round].imageUrl = img_url;
 
       if (correct_answer === questions[round].correct) {
         // console.log(img_url);
@@ -269,7 +324,7 @@ $(document).ready(function() {
         // console.log(round);
         $("#image").replaceWith(
           '<img id = "image" src="' +
-            questions[round].image +
+            questions[round].imageUrl +
             '" class="col-md-4 text-center img-thumbnail">'
         );
         wins++;
@@ -280,13 +335,13 @@ $(document).ready(function() {
         );
         $("#image").replaceWith(
           '<img id = "image" src="' +
-            questions[round].image +
+            questions[round].imageUrl +
             '" class="col-md-4 text-center img-thumbnail">'
         );
         losses++;
       }
       $("#timer").hide();
-      setTimeout(next_round, 5000);
+      setTimeout(next_round, 1000);
     });
   });
 });
