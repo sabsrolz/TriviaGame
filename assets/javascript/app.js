@@ -26,16 +26,6 @@ $(document).ready(function() {
   });
 
   const question1 = {
-    Q: "Who invented the BALLPOINT PEN?",
-    A: "Biro Brothers",
-    B: "Waterman Brothers",
-    C: "Bicc Brothers",
-    D: "Write Brothers",
-    correct: "Biro Brothers",
-    image: "ballpointpen"
-  };
-
-  const question2 = {
     Q: "Which scientist discovered the radioactive element radium?",
     A: "Isaac Newton",
     B: "Albert Einstein",
@@ -43,6 +33,15 @@ $(document).ready(function() {
     D: "Marie Curie",
     correct: "Marie Curie",
     image: "radium"
+  };
+  const question2 = {
+    Q: "Who invented the BALLPOINT PEN?",
+    A: "Biro Brothers",
+    B: "Waterman Brothers",
+    C: "Bicc Brothers",
+    D: "Write Brothers",
+    correct: "Biro Brothers",
+    image: "ballpoint + pen"
   };
 
   const question3 = {
@@ -147,7 +146,7 @@ $(document).ready(function() {
       $("#answer3").hide();
       $("#answer4").hide();
       number = 10;
-      setTimeout(next_round, 3000);
+      setTimeout(next_round, 5000);
     } else {
       number--;
     }
@@ -161,6 +160,7 @@ $(document).ready(function() {
 
   function next_round() {
     round++;
+    $("#q_number").text("Question " + (round + 1));
     number = 10;
 
     $("#timer").show();
@@ -205,6 +205,7 @@ $(document).ready(function() {
   }
 
   $("#start").on("click", function gameStarts() {
+    $("#q_number").html("Question 1");
     $("#startImage").hide();
     run();
     $("#start").hide(); //hide start button
@@ -284,7 +285,7 @@ $(document).ready(function() {
         losses++;
       }
       $("#timer").hide();
-      setTimeout(next_round, 3000);
+      setTimeout(next_round, 5000);
     });
   });
 });
