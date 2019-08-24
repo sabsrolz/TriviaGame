@@ -154,7 +154,7 @@ $(document).ready(function() {
       $("#answer3").hide();
       $("#answer4").hide();
       number = 10;
-      setTimeout(next_round, 1000);
+      setTimeout(next_round, 3000);
     } else {
       number--;
     }
@@ -171,7 +171,6 @@ $(document).ready(function() {
     $("#q_number").text("Question " + (round + 1));
     number = 10;
 
-    $("#timer").show();
     $("#image").hide();
 
     if (round === total_rounds) {
@@ -236,8 +235,10 @@ $(document).ready(function() {
       });
     } else {
       $("#output").hide();
-
       run();
+      $("#timer").html("<h2>" + number + "</h2>");
+
+      $("#timer").show();
 
       $("#answer1").attr("answer", questions[round].A);
       $("#answer2").attr("answer", questions[round].B);
@@ -290,7 +291,7 @@ $(document).ready(function() {
 
   $(".answers").on("click", function select_option() {
     $("#image").hide();
-    $("#timer").show();
+    $("#timer").hide();
     $("#output").show();
     stop();
     //setTimeout(next_round, 3000);
@@ -341,7 +342,7 @@ $(document).ready(function() {
         losses++;
       }
       $("#timer").hide();
-      setTimeout(next_round, 1000);
+      setTimeout(next_round, 3000);
     });
   });
 });
