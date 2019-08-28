@@ -8,7 +8,7 @@ $(document).ready(function() {
   let losses = 0;
   let image_id = [];
   const key = "nxy71hu767W2YM7H7grusEx0f6oO54gW";
-
+  $("#reset_game").hide();
   $.ajax({
     url:
       "https://api.giphy.com/v1/gifs/search?q=globe&api_key=" +
