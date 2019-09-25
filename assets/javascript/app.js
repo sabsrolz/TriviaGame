@@ -70,14 +70,13 @@ $(document).ready(function() {
   };
 
   const question5 = {
-    Q:
-      "Who was the first American female to patent her invention, a method of weaving straw with silk?",
-    A: "Marjorie Joyner",
-    B: "Margaret Knight",
-    C: "Amanda Jones",
-    D: "Mary Kies",
-    correct: "Mary Kies",
-    image: "silky",
+    Q: "Who invented the first controllable flying aeroplane (airplane)?",
+    A: "Wright Brothers",
+    B: "Lidenbergh Brothers",
+    C: "South Brothers",
+    D: "West Brothers",
+    correct: "Wright Brothers",
+    image: "Wright+brothers",
     imageUrl: ""
   };
 
